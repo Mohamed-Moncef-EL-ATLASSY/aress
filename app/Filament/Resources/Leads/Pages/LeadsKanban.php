@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Leads\Pages;
 use App\Filament\Resources\Leads\LeadResource;
 use App\Models\Lead;
 use Filament\Resources\Pages\Page;
+use Filament\Support\Enums\Width;
+use BackedEnum;
 use Livewire\Attributes\On;
 
 class LeadsKanban extends Page
@@ -14,6 +16,10 @@ class LeadsKanban extends Page
     protected string $view = 'filament.resources.leads.pages.leads-kanban';
 
     protected static ?string $navigationLabel = 'Leads Kanban';
+
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-view-columns';
+
+    protected Width|string|null $maxContentWidth = Width::Full;
 
 
     public array $statuses = [];

@@ -30,7 +30,9 @@ class LeadActivitiesRelationManager extends RelationManager
             ->actions([])
             ->bulkActions([])
             ->paginated([10, 25, 50])
-            // ->heading('Timeline')
+            ->heading(null)
+            ->header(fn () => view('filament.leads.timeline-table-style'))
+            ->extraAttributes(['class' => 'lead-timeline-table'])
             ->emptyStateHeading('No timeline yet');
     }
 

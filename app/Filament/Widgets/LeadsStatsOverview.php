@@ -10,6 +10,11 @@ class LeadsStatsOverview extends StatsOverviewWidget
 {
     protected static ?int $sort = 1;
 
+    protected function getColumns(): int
+    {
+        return 4;
+    }
+
     protected function getStats(): array
     {
         $totalLeads = Lead::query()->count();
@@ -19,8 +24,7 @@ class LeadsStatsOverview extends StatsOverviewWidget
         return [
             Stat::make('Total Leads', $totalLeads)
                 ->color('primary'),
-            Stat::make('Conversion Rate', $conversionRate . '%')
-                ->description('Won / total')
+            Stat::make('Conversion Rate', $conversionRate . '% Won / total')
                 ->color('success'),
             Stat::make('New', Lead::query()->where('status', Lead::STATUS_NEW)->count())
                 ->color('gray'),

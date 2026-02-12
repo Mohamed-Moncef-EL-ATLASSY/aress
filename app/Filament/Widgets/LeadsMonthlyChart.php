@@ -12,6 +12,11 @@ class LeadsMonthlyChart extends ChartWidget
 
     protected static ?int $sort = 2;
 
+    public function getColumnSpan(): int | string | array
+    {
+        return 2;
+    }
+
     protected function getData(): array
     {
         $start = Carbon::now()->startOfMonth()->subMonths(5);
