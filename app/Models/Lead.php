@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Lead extends Model
 {
@@ -27,7 +29,23 @@ class Lead extends Model
         'email',
         'phone',
         'company_source',
+        'company_source_id',
         'status',
         'notes',
+        'events',
     ];
+
+    protected $casts = [
+        'events' => 'array',
+    ];
+
+    public function companySource(): BelongsTo
+    {
+        return $this->belongsTo(CompanySource::class);
+    }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(LeadActivity::class);
+    }
 }
