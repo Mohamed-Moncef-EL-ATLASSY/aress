@@ -8,6 +8,7 @@
         .kanban-column-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
         .kanban-column-title { font-size: 0.875rem; font-weight: 600; color: rgb(15 23 42); }
         .kanban-column-count { font-size: 0.75rem; color: rgb(100 116 139); }
+        .kanban-drop-zone { min-height: 150px; }
         .kanban-card { cursor: grab; }
         .kanban-card:active { cursor: grabbing; }
         .kanban-ghost { opacity: 0.5; }
@@ -35,15 +36,15 @@
                 $columnKey = 'column-' . \Illuminate\Support\Str::slug($status);
                 $leads = $this->leadsByStatus[$status] ?? [];
             @endphp
-            <div class="kanban-column rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+            <div class="kanban-column rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
                 <div class="kanban-column-header">
                     <h3 class="kanban-column-title">{{ $status }}</h3>
                     <span class="kanban-column-count">{{ count($leads) }}</span>
                 </div>
-                <div class="space-y-3" data-kanban-column data-status="{{ $status }}" data-column-key="{{ $columnKey }}">
+                <div class="space-y-3 kanban-drop-zone" data-kanban-column data-status="{{ $status }}" data-column-key="{{ $columnKey }}">
                     @foreach ($leads as $lead)
                         <div
-                            class="kanban-card rounded-lg border border-gray-200 bg-white p-3 text-sm shadow-sm transition hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
+                            class="kanban-card rounded-lg border border-gray-200 bg-white p-3 text-sm shadow-sm transition hover:shadow-md"
                             data-lead-id="{{ $lead->id }}"
                         >
                             <div class="kanban-card-head">
@@ -54,7 +55,7 @@
                                 <span class="kanban-card-id">#{{ $lead->id }}</span>
                             </div>
                             <div class="kanban-card-meta">
-                                <span class="badge bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200">
+                                <span class="badge bg-amber-50 text-amber-700">
                                     <span class="badge-dot"></span>
                                     {{ $lead->companySource?->name ?? $lead->company_source }}
                                 </span>
@@ -75,7 +76,7 @@
 
     @once
         @push('scripts')
-            <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+            <script src="{{ asset('js/sortable.min.js') }}"></script>
             <script>
                 const kanbanComponentId = @js($this->getId());
 

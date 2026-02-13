@@ -1,27 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\Leads\Pages;
+namespace App\Filament\Resources\LeadsKanbanResource\Pages;
 
-use App\Filament\Resources\Leads\LeadResource;
+use App\Filament\Resources\LeadsKanbanResource;
 use App\Models\Lead;
 use Filament\Resources\Pages\Page;
 use Filament\Support\Enums\Width;
-use BackedEnum;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Computed;
 
-class LeadsKanban extends Page
+class ManageLeadsKanban extends Page
 {
-    protected static string $resource = LeadResource::class;
+    protected static string $resource = LeadsKanbanResource::class;
 
     protected string $view = 'filament.resources.leads.pages.leads-kanban';
-
-    protected static ?string $navigationLabel = 'Kanban';
-
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-view-columns';
-
-    protected static ?int $navigationSort = 2;
-
-    protected static \UnitEnum|string|null $navigationGroup = 'Leads';
 
     protected Width|string|null $maxContentWidth = Width::Full;
 
@@ -32,7 +24,8 @@ class LeadsKanban extends Page
         $this->statuses = Lead::STATUSES;
     }
 
-    public function getLeadsByStatusProperty(): array
+    #[Computed]
+    public function leadsByStatus(): array
     {
         return Lead::query()
             ->with('companySource')
@@ -43,7 +36,6 @@ class LeadsKanban extends Page
             ->all();
     }
 
-    #[On('lead-status-updated')]
     public function updateLeadStatus(int $leadId, string $status): void
     {
         if (! in_array($status, Lead::STATUSES, true)) {
@@ -58,5 +50,8 @@ class LeadsKanban extends Page
 
         $lead->status = $status;
         $lead->save();
+
+        // Skip rendering to keep drag smooth - the DOM is already updated by Sortable.js
+        $this->skipRender();
     }
 }

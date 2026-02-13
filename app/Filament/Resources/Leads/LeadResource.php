@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Leads;
 
 use App\Filament\Resources\Leads\Pages\CreateLead;
 use App\Filament\Resources\Leads\Pages\EditLead;
-use App\Filament\Resources\Leads\Pages\LeadsKanban;
 use App\Filament\Resources\Leads\Pages\ListLeads;
 use App\Filament\Resources\Leads\RelationManagers\LeadActivitiesRelationManager;
 use App\Filament\Resources\Leads\Schemas\LeadForm;
@@ -21,6 +20,10 @@ class LeadResource extends Resource
     protected static ?string $model = Lead::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static \UnitEnum|string|null $navigationGroup = 'Leads';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -45,7 +48,6 @@ class LeadResource extends Resource
     {
         return [
             'index' => ListLeads::route('/'),
-            'kanban' => LeadsKanban::route('/kanban'),
             'create' => CreateLead::route('/create'),
             'edit' => EditLead::route('/{record}/edit'),
         ];

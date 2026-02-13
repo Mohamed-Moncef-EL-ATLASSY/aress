@@ -33,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->darkMode(false)
             ->assets([
                 Css::make('app-theme', Vite::asset('resources/css/app.css')),
             ])
