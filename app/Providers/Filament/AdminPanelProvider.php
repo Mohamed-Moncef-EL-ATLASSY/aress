@@ -20,6 +20,7 @@ use App\Filament\Widgets\LeadsMonthlyChart;
 use App\Filament\Widgets\LeadsStatsOverview;
 use Filament\Support\Assets\Css;
 use Illuminate\Support\Facades\Vite;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -37,6 +38,12 @@ class AdminPanelProvider extends PanelProvider
             ->assets([
                 Css::make('app-theme', Vite::asset('resources/css/app.css')),
             ])
+            ->plugin(
+                FilamentFullCalendarPlugin::make()
+                    ->selectable()
+                    ->editable()
+                    ->plugins(['dayGrid', 'timeGrid', 'interaction'])
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([

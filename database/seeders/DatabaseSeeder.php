@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CompanySourceSeeder::class);
         $this->call(LeadSeeder::class);
+        $this->call(CommercialSeeder::class);
     }
 }
