@@ -2,8 +2,19 @@
 builder = "nixpacks"
 
 [build.nixpacks]
-providers = ["php"]
+providers = ["php", "nodejs"]
 
 [env]
 PHP_VERSION = "8.4"
+NODE_ENV = "production"
 COMPOSER_PROCESS_TIMEOUT = "900"
+
+[nixpacks.phases.build]
+dependsOn = "nodejs"
+cmds = [
+  "npm install",
+  "npm run build",
+  "composer install --optimize-autoloader --no-scripts --no-interaction",
+  "php artisan package:discover --ansi",
+  "php artisan filament:upgrade"
+]
