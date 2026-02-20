@@ -7,6 +7,10 @@ Internal CRM to manage leads, track pipeline status, and view performance metric
 - Laravel: fast CRUD, migrations, validation, authentication, and stable ORM for business logic.
 - Filament: rapid admin UI, resources, dashboard widgets, and Livewire-powered interactivity.
 - MySQL/PostgreSQL: relational storage with strong consistency for lead lifecycle data.
+- Vite: modern asset bundler for fast development and optimized production builds.
+- Observers/Events: event-driven architecture for decoupled lead lifecycle logic and automated triggers.
+- Job Queue (Laravel Queue): asynchronous task processing for scalable background operations.
+- PHPUnit: comprehensive testing framework for reliability and maintainability.
 
 ## Features
 - Lead CRUD (name, email, phone, company source, status, notes, timestamps)
@@ -31,8 +35,8 @@ Internal CRM to manage leads, track pipeline status, and view performance metric
 - Kanban pipeline: `http://localhost:8000/admin/leads/kanban`
 
 ## Seeded Test User
-- Email: `test@example.com`
-- Password: `password`
+- Email: `moncef.elatlassy@gmail.com`
+- Password: `moncef.elatlassy`
 
 ## Notes
 - Lead statuses: New, Contacted, Interested, Negotiation, Won, Lost.
