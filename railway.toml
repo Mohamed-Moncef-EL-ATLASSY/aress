@@ -1,9 +1,9 @@
 [build]
-builder = "heroku.buildpacks"
-buildpacks = [
-  "heroku/php"
-]
+builder = "nixpacks"
 
-[build.config]
+[build.nixpacks]
+providers = ["php"]
+
+[env]
 PHP_VERSION = "8.4"
 COMPOSER_PROCESS_TIMEOUT = "900"
